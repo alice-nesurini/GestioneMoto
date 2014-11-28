@@ -10,12 +10,12 @@
 		}
 
 		public function get_by_id($id) {
-		    /*$query=$this->db->get_where('Maestro', array('id' => $id));
-    		return $query->row_array();*/
+		    $query=$this->db->get_where('Maestro', array('id' => $id));
+    		return $query->row_array();
 		}
 		public function get_all_sg() {
 		    //$query=$this->db->get_where('Maestro', array('id' => $id));
-		    $this->db->select('Maestro.Nome, Maestro.Cognome, Maestro.Indirizzo, Maestro.Regione, Maestro.Citta, Maestro.Email,
+		    $this->db->select('Maestro.Id, Maestro.Nome, Maestro.Cognome, Maestro.Indirizzo, Maestro.Regione, Maestro.Citta, Maestro.Email,
 		    	ScuolaGuida.Nome AS NomeSG');
 			$this->db->from('Maestro');
 			$this->db->join('ScuolaGuida', 'Maestro.IdScuolaGuida=ScuolaGuida.id');

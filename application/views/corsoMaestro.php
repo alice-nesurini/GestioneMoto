@@ -16,9 +16,9 @@
 			foreach($corso as $row){
 				echo("<tr>");
 				echo("<td>".$row->Tipo."</td>");
-				echo("<td>".$row->PrimaData."</td>");
+				/*echo("<td>".$row->PrimaData."</td>");
 				echo("<td>".$row->SecondaData."</td>");
-				echo("<td>".$row->TerzaData."</td>");
+				echo("<td>".$row->TerzaData."</td>");*/
 				echo("<td>".$row->Costo."</td>");
 				echo("<td>");
 				//EDIT
@@ -29,6 +29,7 @@
 				echo("<td>");
 				//DELETE
 				echo(form_open('corso/delete'));
+				//print $row->Id;
 				echo("<button name='deleteId' type='submit' value='".$row->Id."' class='btn btn-default glyphicon glyphicon-remove'>Delete</button>");
 				echo("</form>");
 				echo("</td>");

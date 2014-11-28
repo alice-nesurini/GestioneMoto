@@ -27,7 +27,7 @@
 			<option>A</option>
 		</select></br></br>
 		<input style="display:none;" name='idCorso' value=<?php echo($idCorso); ?> type='button' class='form-control'/>
-		<input type="submit" value="Iscriviti" class='btn btn-default'/>
+		<button type="submit" name="id" value=<?php echo($idCorso); ?> class='btn btn-default'>Iscriviti</button>
 	</form>
 	</ul>
 </div>

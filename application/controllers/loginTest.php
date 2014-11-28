@@ -46,13 +46,37 @@
     				return true;
       		}
       		else{
+              $data['nickname']=$this->session->userdata('nickname');
       				$resultAd=$this->User_model->login_administrator($nickname, $password);
+              $this->load->model('User_model');
+              $id=$this->User_model->getAdminByNickname($nickname);
+              $this->session->set_userdata('idAdmin', $id);
               if(!(empty($resultAd))){
                   $data['nickname']=$this->session->userdata('nickname');
                   $this->load->view('headLogin', $data);
+                  $this->session->set_userdata('isAdmin', true);
                   $this->load->model('ScuolaGuida_model');
                   $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_all();
-                  $this->load->view('administratorHome', $data);
+
+                  $this->load->library('session');
+                  $this->load->model('ScuolaGuida_model');
+                  $data['scuolaGuida']=$this->ScuolaGuida_model->get_all();
+                  $this->load->library('form_validation');
+                  //$this->load->view('left');
+                  $session=$this->session->all_userdata();
+                  //if($session['isMaestro']==true){
+                  if($this->session->userdata('isMaestro')){
+                      $this->load->view('leftMaestro');
+                  }
+                  else if($this->session->userdata('isAdmin')){
+                      $this->load->view('leftAdmin');
+                  }
+                  else{
+                      $this->load->view('left');
+                  }
+                  $data['path']="../img/ticino.jpg";
+                  $this->load->view('home', $data);
+
                   return true;
                   //LOAD ADMINISTRATOR PANEL 
               }

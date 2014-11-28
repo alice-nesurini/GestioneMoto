@@ -6,7 +6,20 @@
 	<ul>
 		<?php
 			echo("<table style='table-layout: fixed; word-wrap: break-word;' class='table table-striped'>");
-			foreach($query as $row){
+				?>
+				<thead>
+				   	<tr>
+				      	<th>Nome</th>
+				      	<th>Cognome</th>
+				      	<th>Citta</th>
+				      	<th>Regione</th>
+				      	<th>Indirizzo</th>
+				      	<th>Email</th>
+				      	<th>Scuola guida</th>
+				   	</tr>
+				</thead>
+				<?php
+				foreach($query as $row){
 				echo("<tr>");
 				//echo("<p>".$row->Id." ");
 				echo("<td>".$row->Nome."</td>");

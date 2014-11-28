@@ -50,5 +50,13 @@
 			$query=$this->db->get();
     		return $query->result();
 		}
+
+		public function getAdminByNickname($nickname){
+			$this->db->select('Id');
+			$this->db->from('Administrator');
+			$this->db->where('Nickname', $nickname);
+			$query=$this->db->get();
+    		return $query->row('Id');
+		}	
 	}
 ?>

@@ -5,13 +5,19 @@
 			$this->load->helper('form');
 			$this->load->view('head');
 			$this->load->model('Corso_model');
-		    $data['corso']=$this->Corso_model->get_all();
+		    $returned=$this->Corso_model->get_all();
+		    $data['corso']=$returned['corsi'];
+		    $data['costo']=$returned['costi'];
 		    //$this->load->view('left');
 		    $this->load->library('session');
 		    $session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
+			//if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -33,30 +39,40 @@
 		    $this->load->library('session');
 		    //$session=$this->session->all_userdata('idIscrizioneCorso', $id);
 		   	$session=$this->session->all_userdata();
+		   	$data['idCorso']=$id;
 		    //$this->load->view('left');
 		    
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 			$this->load->view('CorsoInfo', $data);
 		}
-		public function iscriviti(){
+		public function iscriviti($idCorso){
 			$this->load->helper('form');
-			$this->load->view('head');
+			$this->load->view('headSecond');
 
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 		    //$this->load->view('left');
-			$this->load->view('iscriviti');
+		    $data['idCorso']=$idCorso;
+			$this->load->view('iscriviti', $data);
 		}
 		public function iscrizioneAllievo(){
 			$this->load->helper('form');
@@ -73,15 +89,24 @@
 			$this->load->view('head');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 		    //$this->load->view('left');
 		    //DA METTERE A POSTO RITORNA PAGINA CORSO
-			$this->load->view('iscriviti');
+			//$this->load->view('iscriviti');
+			$idCorso=$this->input->post('id');
+			$this->load->model('Corso_model');
+			$data['info']=$this->Corso_model->info($idCorso);
+			$data['idCorso']=$idCorso;
+			$this->load->view('corsoInfo', $data);
 		}
 
 		public function check(){
@@ -93,11 +118,12 @@
 			$email=$this->input->post('email');
 			$scadenzaPatentino=$this->input->post('scadenzaPatentino');
 			$categoriaPatentino=$this->input->post('categoriaPatentino');
-			$idCorso=$this->input->post('id');
+			//$idCorso=$this->input->post('id');
 
-			$idCorso=$this->input->post('idCorso');
+			$idCorso=$this->input->post('id');
 			$this->load->model('Allievo_model');
-		    $this->Allievo_model->newAllievo($nome, $cognome, $indirizzo, $nip, $email, $scadenzaPatentino, $categoriaPatentino, $idCorso);
+			//print "Id corso".$idCorso;
+		    $this->Allievo_model->newAllievo($nome, $cognome, $indirizzo, $nip, $email, $telefono, $scadenzaPatentino, $categoriaPatentino, $idCorso);
 		}
 		public function showEditMaestro(){
 			$this->load->helper('form');
@@ -109,9 +135,13 @@
 			$this->load->model('Corso_model');
 		    //$data['corso']=$this->Corso_model->getById($id);
 
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -129,9 +159,13 @@
 
 		    $this->load->library('session');
 		    $session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -148,29 +182,35 @@
 
 		    $this->load->library('session');
 		    $session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 		    $this->load->model('Corso_model');
 		    $data['info']=$this->Corso_model->info($id);
+		    //print $id;
+		    $data['numberRows']=$this->Corso_model->rowNumbers($id);
 			$this->load->view('corsoInfoMaestro', $data);
 		}
 		public function save(){
 			$this->load->helper('form');
 			$this->load->library('form_validation');
      		$this->form_validation->set_rules('tipo', 'Tipo', 'required');
-     		$this->form_validation->set_rules('primaData', 'Prima Data', 'required');
-     		$this->form_validation->set_rules('secondaData', 'Seconda Data', 'required');
-     		$this->form_validation->set_rules('terzaData', 'Terza Data', 'required');
+     		$this->form_validation->set_rules('data1', 'Prima Data', 'required');
+     		$this->form_validation->set_rules('data2', 'Seconda Data', 'required');
+     		//$this->form_validation->set_rules('Data3', 'Terza Data', 'required');
      		$this->form_validation->set_rules('costo', 'Costo', 'required');
 			if($this->form_validation->run()==true){
 				$tipo=$this->input->post('tipo');
-				$primaData=$this->input->post('primaData');
-				$secondaData=$this->input->post('secondaData');
-				$terzaData=$this->input->post('terzaData');
+				$primaData=$this->input->post('data1');
+				$secondaData=$this->input->post('data2');
+				$terzaData=$this->input->post('data3');
 				$costo=$this->input->post('costo');
 				$idSave=$this->input->post('idSave');
 
@@ -183,15 +223,20 @@
 			$this->load->view('head');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
+			//if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 		    $data['session']=$session;
 		    $this->load->model('Corso_model');
 		    $data['info']=$this->Corso_model->info($idSave);
+		    $data['numberRows']=$this->Corso_model->rowNumbers($idSave);
 			$this->load->view('corsoInfoMaestro', $data);
 		}
 		public function newCorsoView(){
@@ -200,15 +245,20 @@
 			$this->load->view('head');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
-			if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
+			//if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
 		    $data['session']=$session;
 		    $this->load->model('Corso_model');
-			$this->load->view('newCorso');
+		    $data['costo']=$this->Corso_model->getCosti();
+			$this->load->view('newCorso', $data);
 		}
 		public function newCorso(){
 			$this->load->helper('form');
@@ -219,7 +269,7 @@
      		$this->form_validation->set_rules('tipo', 'Tipo', 'required');
      		$this->form_validation->set_rules('prima', 'Prima Data', 'required');
      		$this->form_validation->set_rules('seconda', 'Seconda Data', 'required');
-     		$this->form_validation->set_rules('terza', 'Terza Data', 'required');
+     		//$this->form_validation->set_rules('terza', 'Terza Data', 'required');
      		$this->form_validation->set_rules('costo', 'Costo', 'required');
 			if($this->form_validation->run()==true){
 				$tipo=$this->input->post('tipo');
@@ -238,9 +288,13 @@
 			}
 
 			$this->load->view('head');
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }

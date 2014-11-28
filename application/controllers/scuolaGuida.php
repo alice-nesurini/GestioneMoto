@@ -13,9 +13,13 @@
 		    $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 		   // $session=$this->session->all_userdata();
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    //if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -28,9 +32,13 @@
 		    $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_by_id($id);
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if(isset($session['isMaestro'])==true){
+		    //if(isset($session['isMaestro'])==true){
+		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }

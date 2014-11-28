@@ -13,9 +13,13 @@
 		    $data['query']=$this->Maestro_model->get_all_sg();
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    //if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -28,9 +32,13 @@
 		    $maestri['query']=$this->Maestro_model->get_by_id($id);
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
+		   	//if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }

@@ -9,9 +9,13 @@
 		    $this->load->library('form_validation');
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    //if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -24,9 +28,13 @@
 		    $this->load->library('form_validation');
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    //if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -69,9 +77,13 @@
 			$this->load->view('headSecond');
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
-		    if($session['isMaestro']==true){
+		    if($this->session->userdata('isMaestro')){
+		    //if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
+		    else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 		    else{
 		    	$this->load->view('left');
 		    }
@@ -90,7 +102,9 @@
 
 			error_reporting(0);
 			//prima pagina a caricare carica le sessioni
-			if($session['isMaestro']){
+			//if($session['isMaestro']){
+			//if($this->session->userdata('isMaestro')){
+			if($this->session->userdata('isMaestro')){
 				$this->session->set_userdata('isMaestro', false);
 			}
 			if($session['isAdmin']){
@@ -100,9 +114,13 @@
 			$this->load->model('ScuolaGuida_model');
 		    $data['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 		    $this->load->library('form_validation');
-			if($session['isMaestro']==true){
+			//if($session['isMaestro']==true){
+			if($this->session->userdata('isMaestro')){
 				$this->load->view('leftMaestro');
 			}
+			else if($this->session->userdata('isAdmin')){
+                $this->load->view('leftAdmin');
+            }
 			else{
 				$this->load->view('left');
 			}

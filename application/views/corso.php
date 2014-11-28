@@ -10,10 +10,15 @@
 			foreach($corso as $row){
 				echo("<tr>");
 				echo("<td>".$row->Tipo."</td>");
+				/*OLD Corso
 				echo("<td>".$row->PrimaData."</td>");
 				echo("<td>".$row->SecondaData."</td>");
-				echo("<td>".$row->TerzaData."</td>");
-				echo("<td>".$row->Costo."</td>");
+				echo("<td>".$row->TerzaData."</td>");*/
+				foreach($costo as $costoRow){
+					if($row->IdCosto==$costoRow->Id){
+						echo("<td>".$costoRow->Costo."</td>");
+					}
+				}
 				echo("<td>");
 				echo(form_open('corso/info'));
 				echo("<button name='id' type='submit' value='".$row->Id."' class='btn btn-default'>Info</button>");
