@@ -2,9 +2,13 @@
 	class GestioneAllievo extends CI_Controller{
 
 		public function show(){
-			$this->load->view('head');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
+			
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
@@ -23,9 +27,13 @@
 			//$this->load->view('gestioneAllievoR', $data);
         }
         public function accetta(){
-        	$this->load->view('head');
-			$this->load->library('session');
+        	$this->load->library('session');
 			$session=$this->session->all_userdata();
+        	$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
+			
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }

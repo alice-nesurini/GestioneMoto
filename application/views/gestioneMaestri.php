@@ -24,6 +24,12 @@
 		<?php
 			foreach($maestri as $row){
 				echo("<tr>");
+				if($row->Foto!=null){
+					echo('<td><img src="data:image/jpeg;base64,'.base64_encode(stripslashes($row->Foto)).'" width="60"></td>');
+				}
+				else{
+					echo("<td></td>");
+				}
 				echo("<td id='".$row->Nome."".$row->Id."'>".$row->Nome."</td>");
 				echo("<td id='".$row->Cognome."".$row->Id."'>".$row->Cognome."</td>");
 				echo("<td id='".$row->Citta."".$row->Id."'>".$row->Citta."</td>");
@@ -31,9 +37,12 @@
 				echo("<td id='".$row->Indirizzo."".$row->Id."'>".$row->Indirizzo."</td>");
 				echo("<td id='".$row->Email."".$row->Id."'>".$row->Email."</td>");
 				echo("<td id='".$row->NomeSG."".$row->Id."'>".$row->NomeSG."</td>");
-				echo(form_open('gestioneMaestro/editMaestro'));
-				echo("<td><button type='submit' id='".$row->Id."' class='glyphicon glyphicon-edit btn btn-default'>Edit</button></td>");
-				echo(form_close());
+				echo(form_open('gestioneMaestri/deleteMaestro'));
+				echo("<td><button type='submit' name='deleteId' value='".$row->Id."' class='glyphicon glyphicon-remove btn btn-default'>Elimina</button></td>");
+				echo("</form>");
+				echo(form_open('gestioneMaestri/editMaestro'));
+				echo("<td><button type='submit' name='editId' value='".$row->Id."' class='glyphicon glyphicon-edit btn btn-default'>Edit</button></td>");
+				echo("</form>");
 			}
 		echo("</table>");
 		?>

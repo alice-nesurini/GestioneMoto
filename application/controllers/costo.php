@@ -1,10 +1,13 @@
 <?php
 	class Costo extends CI_Controller{
 		public function show(){
-			$this->load->view('head');
 			$this->load->helper('form');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
@@ -17,10 +20,13 @@
 		}
 		public function cambiamentoView(){
 			$this->load->library('form_validation');
-		    $this->load->view('head');
 			$this->load->helper('form');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
@@ -40,10 +46,13 @@
 		    $costo=$this->input->post('costo');
 		    $idCosto=$this->input->post('id');
 		    $this->form_validation->run();
-		    $this->load->view('head');
 			$this->load->helper('form');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }

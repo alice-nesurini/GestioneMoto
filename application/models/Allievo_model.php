@@ -20,7 +20,7 @@
 
 			$this->db->insert('Allievo', $data);
 			$idAllievo=$this->db->insert_id();
-			print $idAllievo;
+			//print $idAllievo;
 			//SELECT * FROM Lezione WHERE IdCorso=$idCorso
 			
 			$this->db->select('*');
@@ -178,7 +178,7 @@
 			//$this->db->where("Partecipazione.IdAllievo", null);
 			$this->db->or_where('Corso.Tipo', "Passaggio A1 ad A"); 
 			$this->db->group_by("Partecipazione.IdAllievo");
-			$this->db->having("COUNT(Partecipazione.IdAllievo)<", "3");
+			$this->db->having("COUNT(Partecipazione.IdAllievo)<", "2");
 			//$this->db->having("Partecipazione.IdLezione", $idLezione);
 			$query=$this->db->get();
     		return $query->result();

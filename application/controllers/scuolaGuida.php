@@ -8,7 +8,10 @@
 
 		public function show(){
 			$this->load->library('session');
-			$this->load->view('head');
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 			$this->load->model('ScuolaGuida_model');
 		    $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 		   // $session=$this->session->all_userdata();
@@ -27,7 +30,10 @@
 		}
 		public function show_id($id) {
 			$this->load->library('session');
-			$this->load->view('head');
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 			$this->load->model('ScuolaGuida_model');
 		    $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_by_id($id);
 		    //$this->load->view('left');

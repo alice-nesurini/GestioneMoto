@@ -3,12 +3,16 @@
 
 		public function show() {
 			$this->load->library('session');
-			$this->load->view('head');
+			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 			$this->load->model('ScuolaGuida_model');
 		    $data['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 		    $this->load->library('form_validation');
 		    //$this->load->view('left');
-		    $session=$this->session->all_userdata();
+		    
 		    //if($session['isMaestro']==true){
 		    if($this->session->userdata('isMaestro')){
 		    	$this->load->view('leftMaestro');
@@ -24,7 +28,10 @@
 		}
 		public function search(){
 			$this->load->library('session');
-			$this->load->view('head');
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    $this->load->library('form_validation');
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
@@ -74,7 +81,10 @@
 
 		public function region($region){
 			$this->load->library('session');
-			$this->load->view('headSecond');
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('headSecond', $data);
 		    //$this->load->view('left');
 		    $session=$this->session->all_userdata();
 		    if($this->session->userdata('isMaestro')){
@@ -110,7 +120,10 @@
 			if($session['isAdmin']){
 				$this->session->set_userdata('isAdmin', false);
 			}
-			$this->load->view('headFirst');
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('headFirst', $data);
 			$this->load->model('ScuolaGuida_model');
 		    $data['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 		    $this->load->library('form_validation');

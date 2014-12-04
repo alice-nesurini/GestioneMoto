@@ -28,7 +28,10 @@
           //LOAD MAESTRO PANEL
          	$result=$this->User_model->login_Maestro($nickname, $password);
          	if(!(empty($result))){
+            $this->session->set_userdata('isMaestro', true);
             $data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
 
             //SET ID Maestro to SESSION
             $this->load->model('Maestro_model');
@@ -37,7 +40,7 @@
             $this->session->set_userdata('idMaestro', $id);
 
             $this->load->view('headLogin', $data);
-            $this->session->set_userdata('isMaestro', true);
+            
             $this->load->model('ScuolaGuida_model');
             $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_all();
             //$session['isMaestro']==true
@@ -52,9 +55,12 @@
               $id=$this->User_model->getAdminByNickname($nickname);
               $this->session->set_userdata('idAdmin', $id);
               if(!(empty($resultAd))){
-                  $data['nickname']=$this->session->userdata('nickname');
-                  $this->load->view('headLogin', $data);
                   $this->session->set_userdata('isAdmin', true);
+                  $data['nickname']=$this->session->userdata('nickname');
+                  $data['isAdmin']=$this->session->userdata('isAdmin');
+                  $data['isMaestro']=$this->session->userdata('isMaestro');
+                  $this->load->view('headLogin', $data);
+                  
                   $this->load->model('ScuolaGuida_model');
                   $scuolaGuida['scuolaGuida']=$this->ScuolaGuida_model->get_all();
 

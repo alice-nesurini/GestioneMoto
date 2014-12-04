@@ -1,10 +1,13 @@
 <?php
 	class Cambiamenti extends CI_Controller{
 		public function show(){
-			$this->load->view('head');
 			$this->load->helper('form');
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
@@ -25,13 +28,16 @@
 			$this->load->view('cambiamenti', $data);
 		}
 		public function selectLezioneView(){
-			$this->load->view('head');
 			$this->load->helper('form');
 
 			$idCorso=$this->input->post('corso');
 			//print $idCorso;
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }
@@ -43,13 +49,16 @@
 			$this->load->view('cambiamentiLezioniView', $data);
 		}
 		public function dragAndDropView(){
-			$this->load->view('head');
 			$this->load->helper('form');
 
 			$idLezione=$this->input->post('lezione');
 
 			$this->load->library('session');
 			$session=$this->session->all_userdata();
+			$data['nickname']=$this->session->userdata('nickname');
+            $data['isAdmin']=$this->session->userdata('isAdmin');
+            $data['isMaestro']=$this->session->userdata('isMaestro');
+			$this->load->view('head', $data);
 		    if($session['isMaestro']==true){
 		    	$this->load->view('leftMaestro');
 		    }

@@ -11,8 +11,23 @@
 		<input name='nome' type='text' class='form-control'/>
 		<label>Cognome:</label>
 		<input name='cognome' type='text' class='form-control'/>
+		<label>Citta:</label>
+		<input name='citta' type='text' class='form-control'/>
 		<label>Indirizzo:</label>
 		<input name='indirizzo' type='text' class='form-control'/>
+		<label>Regione:</label>
+		</br>
+		<select name="regione">
+			<option value="Luganese">Luganese</option>
+			<option value="Mendrisiotto">Mendrisiotto</option>
+			<option value="Bellinzonese">Bellinzonese</option>
+			<option value="Locarnese">Locarnese</option>
+			<option value="Vallemaggia">Vallemaggia</option>
+			<option value="Leventina">Leventina</option>
+			<option value="Riviera">Riviera</option>
+			<option value="Blenio">Blenio</option>
+		</select>
+		</br>
 		<label>Telefono:</label>
 		<input name='telefono' type='text' class='form-control'/>
 		<label>Email:</label>
@@ -28,7 +43,7 @@
 		</select>
 		</br>
 		<label>Osservazioni:</label>
-		<input name='osservazioni' type='text' class='form-control'/>
+		<textarea name='osservazioni'></textarea>
 		<input type="submit" value="Save" class='btn btn-default'/>
 	</form>
 	</ul>
